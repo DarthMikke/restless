@@ -43,8 +43,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     post_id = models.AutoField(primary_key=True, blank=False)
     title = models.CharField(max_length=100, blank=False)
-    url = models.CharField(max_length=100, blank=False, unique=True)
     # TODO: Unique URLs per date
+    url = models.CharField(max_length=100, blank=False, unique=True)
     body = models.TextField(max_length=65536)
     published_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(default=timezone.now)
@@ -59,6 +59,8 @@ class Post(models.Model):
     def get_public_url(self):
         return f"/blog/{self.created_at.strftime('/%Y/%m/%d')}/{self.url}"
 
+    # TODO: Display permalink in the admin form
+    # https://stackoverflow.com/questions/60866928/how-do-i-can-i-get-data-from-model-functions-to-appear-in-django-admin
     def get_permalink(self):
         return f"/blog/posts/{self.url}"
     

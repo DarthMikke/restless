@@ -24,11 +24,10 @@ class PostAdmin(admin.ModelAdmin):
                 'author',
                 'title',
                 'url',
-                'get_public_url'
-                'get_permalink'
+                #'get_public_url',
+                #'get_permalink',
                 'summary',
                 'body',
-                'hidden',
             ]}
         ),
         ('Resources',
@@ -37,6 +36,7 @@ class PostAdmin(admin.ModelAdmin):
             }),
         ('Date information',
             {'fields': [
+                'hidden',
                 'published_at',
                 'created_at',
                 'modified_at']
