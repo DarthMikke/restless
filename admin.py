@@ -19,12 +19,16 @@ class ResourceAdmin(admin.ModelAdmin):
 
 class PostAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,
+        ('',
             {'fields': [
                 'author',
                 'title',
                 'url',
+                'get_public_url'
+                'get_permalink'
+                'summary',
                 'body',
+                'hidden',
             ]}
         ),
         ('Resources',
