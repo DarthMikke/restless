@@ -1,0 +1,9 @@
+{% extends "base_html.html" %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<em>Skrive av {{ post.author }} den {{ post.created_at }}</em>
+<div>
+	{{ post.html|safe }}
+</div>
+{% endblock %}
