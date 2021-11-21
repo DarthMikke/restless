@@ -7,9 +7,6 @@ import datetime
 
 # Create your views here.
 
-def get_index(request):
-    ...
-
 def index_api(request):
     posts_per_page = 10
     offset = 0
@@ -23,7 +20,7 @@ def index_api(request):
         posts = []
     else:
         posts = [x.serialize() for x in posts[from_post:to_post]]
-    response = {'items': len(posts), 'objects': posts}
+    response = {'total': len(posts), 'objects': posts}
 
     return JsonResponse(response)
 
