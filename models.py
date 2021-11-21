@@ -1,5 +1,6 @@
 import markdown
 import urllib.parse as urlparse
+import os.path
 
 from django.utils import timezone
 from django.conf import settings
@@ -58,7 +59,7 @@ class Post(models.Model):
         return f"{self.title}, by {self.author}"
 
     def get_public_url(self):
-        return f"/blog/{self.created_at.strftime('/%Y/%m/%d')}/{self.url}"
+        return os.path.join("/blog/", self.created_at.strftime('%Y/%m/%d'), self.url)
 
     # TODO: Display permalink in the admin form
     # https://stackoverflow.com/questions/60866928/how-do-i-can-i-get-data-from-model-functions-to-appear-in-django-admin
