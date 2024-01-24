@@ -42,6 +42,10 @@ class Resource(models.Model):
 
 
 class Post(models.Model):
+    """
+    Base database object. Can get additional attributes by using Attributes
+    objects.
+    """
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     post_id = models.AutoField(primary_key=True, blank=False)
     title = models.CharField(max_length=100, blank=False)
@@ -83,3 +87,9 @@ class Post(models.Model):
             "summary": self.summary,
             "html": markdown.markdown(self.body),
         }
+
+
+class Attribute(models.Model):
+    name = models.CharField()
+    value = models.CharField()
+    parent = models.ForeignKey(Post, on_delete=models.CASCADE)
