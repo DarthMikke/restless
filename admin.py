@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from .models import Resource, Post
+from .models import Resource, Post, Page
 
 # Register your models here.
 
@@ -47,4 +47,5 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Page)
 admin.site.register(Resource, ResourceAdmin)
