@@ -23,7 +23,7 @@ class PostAdmin(admin.ModelAdmin):
             {'fields': [
                 'author',
                 'title',
-                'url',
+                'name',
                 #'get_public_url',
                 #'get_permalink',
                 'summary',
