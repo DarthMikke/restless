@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    #path('', get_index),
+    path('', FrontPage.as_view()),
     path('api/index', index_api),
     path('rss.xml', get_rss),
     path('<int:year>/<int:month>/<int:day>/<str:post_url>', get_post),
