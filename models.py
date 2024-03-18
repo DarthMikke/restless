@@ -97,15 +97,19 @@ class ContentType(models.Model):
         }
 
 
-class Attribute(models.Model):
-    name = models.CharField()
-    value = models.CharField()
-    parent = models.ForeignKey(Post, on_delete=models.CASCADE)
-class Post(ContentType):
+class ViewableContentType(ContentType):
+    class Meta:
+        abstract = True
+
+    def html(self):
+        return markdown.markdown(self.body)
+
+
+class Post(ViewableContentType):
     def content_type_id(self):
         return "post"
 
 
-class Page(ContentType):
+class Page(ViewableContentType):
     def content_type_id(self):
         return "page"
