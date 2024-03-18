@@ -74,6 +74,14 @@ def get_resource(request, resource_id):
     ...
 
 
+class PageView(TemplateView):
+    model = Page
+    template = "restless/page.html"
+    identifiers = [
+        "name"
+    ]
+
+
 class FrontPage(TemplateView):
     model = Page
     template = "restless/page.html"
