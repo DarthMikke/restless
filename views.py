@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from restless.rest_additions.views import TemplateView
+from restless.rest_additions import TemplateView
 from .models import Page, Post, Resource
 
 import markdown
