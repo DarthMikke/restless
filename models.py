@@ -4,6 +4,7 @@ import os.path
 
 from django.utils import timezone
 from django.conf import settings
+from django.urls import reverse
 
 from django.db import models
 
@@ -61,11 +62,10 @@ class ContentType(models.Model):
     class Meta:
         abstract = True
 
-    def content_type_id(self):
-        """
-        Override this method to retrieve correct paths.
-        """
-        return ...
+    content_type_id = None
+    """
+    Necessary to retrieve correct paths.
+    """
 
     def __str__(self):
         return f"{self.title}, by {self.author}"
@@ -106,10 +106,16 @@ class ViewableContentType(ContentType):
 
 
 class Post(ViewableContentType):
-    def content_type_id(self):
-        return "post"
+    content_type_id = "post"
+
+    def get_permalink(self):
+        return reverse('post', kwargs={
+            "name": self.name
+        })
 
 
 class Page(ViewableContentType):
-    def content_type_id(self):
-        return "page"
+    content_type_id = "page"
+
+    def get_permalink(self):
+        return reverse('page', kwargs={"name": self.name})
