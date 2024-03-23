@@ -1,0 +1,62 @@
+:root {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  overflow: hidden;
+  --body-width: 600px;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6,p,div {
+  margin: 0;
+  padding: 0;
+}
+
+a, a:visited {
+  color: #333333;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+p {
+  margin: .25rem 0;
+}
+
+header {
+  margin: 0;
+  padding: 0;
+  background-color: #9999ff;
+  color: white;
+}
+
+header nav a, header nav a:visited {
+  color: white;
+}
+
+header nav ul, header nav ul li {
+  list-style: none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+body main.wrapper {
+  max-width: var(--body-width);
+  margin: 0 auto;
+}
+
+header {
+  padding-left: calc(50vw - var(--body-width)/2);
+}
