@@ -101,6 +101,13 @@ class ViewableContentType(ContentType):
     class Meta:
         abstract = True
 
+    def get_summary(self):
+        if len(self.summary) > 0:
+            return markdown.markdown(self.summary)
+        else:
+            return markdown.markdown(self.body[:100]) + \
+                ("…" if len(self.body > 100) else "")
+
     def html(self):
         return markdown.markdown(self.body)
 
