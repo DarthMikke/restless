@@ -12,7 +12,10 @@
   <link href="{% static 'style.css' %}" rel="stylesheet">
 </head>
 <body>
-  {% block content %}
-  {% endblock %}
+  {% include 'restless/parts/header.html' %}
+  <main class="wrapper">
+    {% block content %}
+    {% endblock %}
+  </main>
 </body>
 </html>
