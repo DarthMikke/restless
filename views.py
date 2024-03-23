@@ -84,10 +84,20 @@ class PageView(TemplateView):
 
 class FrontPage(TemplateView):
     model = Page
-    template = "restless/page.html"
+    template = "restless/front_page.html"
     identifiers = []
 
     def setup(self, *args, **kwargs):
         super().setup(self, *args, **kwargs)
 
         self.instance = self.model.objects.get(name='forside')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        posts = Post.objects.all().order_by('-published_at')[:5]
+        context["posts"] = posts
+
+        print(context)
+
+        return context
