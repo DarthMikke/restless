@@ -101,3 +101,11 @@ class FrontPage(TemplateView):
         print(context)
 
         return context
+
+
+class PostView(TemplateView):
+    model = Post
+    template = "restless/post.html"
+    identifiers = [
+        "name"
+    ]
