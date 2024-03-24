@@ -74,7 +74,14 @@ def get_resource(request, resource_id):
     ...
 
 
-class PageView(TemplateView):
+class RestlessView(TemplateView):
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        return context
+
+
+class PageView(RestlessView):
     model = Page
     template = "restless/page.html"
     identifiers = [
@@ -82,7 +89,7 @@ class PageView(TemplateView):
     ]
 
 
-class FrontPage(TemplateView):
+class FrontPage(RestlessView):
     model = Page
     template = "restless/front_page.html"
     identifiers = []
@@ -98,12 +105,10 @@ class FrontPage(TemplateView):
         posts = Post.objects.all().order_by('-published_at')[:5]
         context["posts"] = posts
 
-        print(context)
-
         return context
 
 
-class PostView(TemplateView):
+class PostView(RestlessView):
     model = Post
     template = "restless/post.html"
     identifiers = [
