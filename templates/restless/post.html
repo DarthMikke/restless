@@ -1,9 +1,9 @@
-{% extends "base_html.html" %}
+{% extends "restless/base_html.html" %}
 
 {% block content %}
-<h1>{{ post.title }}</h1>
-<em>Skrive av {{ post.author }} den {{ post.created_at }}</em>
+<h1>{{ model.title }}</h1>
+<em>Skrive av {{ model.author }} den {{ model.created_at }}</em>
 <div>
-	{{ post.html|safe }}
+	{{ model.html|safe }}
 </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import Post, Resource
+from restless.rest_additions import TemplateView
+from .models import Page, Post, Resource
 
 import markdown
 import datetime
@@ -71,3 +72,40 @@ def get_post_by_id(request, postid):
 # Apache/Django will take care of this for now.
 def get_resource(request, resource_id):
     ...
+
+
+class PageView(TemplateView):
+    model = Page
+    template = "restless/page.html"
+    identifiers = [
+        "name"
+    ]
+
+
+class FrontPage(TemplateView):
+    model = Page
+    template = "restless/front_page.html"
+    identifiers = []
+
+    def setup(self, *args, **kwargs):
+        super().setup(self, *args, **kwargs)
+
+        self.instance = self.model.objects.get(name='forside')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        posts = Post.objects.all().order_by('-published_at')[:5]
+        context["posts"] = posts
+
+        print(context)
+
+        return context
+
+
+class PostView(TemplateView):
+    model = Post
+    template = "restless/post.html"
+    identifiers = [
+        "name"
+    ]

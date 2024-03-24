@@ -1,0 +1,34 @@
+objects:
+  post:
+    meta:
+      name: "Innlegg"
+    url: "<int:year>/<int:month>/<int:day>/<str:name>"
+    title: string
+    content: string
+    tags: tag[]
+    hidden: boolean
+    private: boolean
+  page:
+    meta:
+      name: "Side"
+      plural: "Sider"
+    url: "<str:name>"
+    title: string
+    content: string
+  project:
+    meta:
+      name: "Prosjekt"
+    url: "projects/<str:name>"
+    title: string
+    content: string
+    date: string
+    languages: language[]
+  tag:
+    meta:
+      name: "Tag"
+      plural: "Tagar"
+    title: string
+  language:
+    meta:
+      name: "Programmeringsspråk"
+    title: string
