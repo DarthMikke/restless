@@ -72,11 +72,6 @@ class ContentType(models.Model):
 
     def get_public_url(self):
         return os.path.join("/blog/", self.created_at.strftime('%Y/%m/%d'), self.name)
-
-    # TODO: Display permalink in the admin form
-    # https://stackoverflow.com/questions/60866928/how-do-i-can-i-get-data-from-model-functions-to-appear-in-django-admin
-    def get_permalink(self):
-        return f"/blog/posts/{self.name}"
     
     #@admin.display(description="User's resources")
     #def get_users_resources(self):
