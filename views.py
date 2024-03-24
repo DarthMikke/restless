@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.http import HttpResponse, JsonResponse
 from restless.rest_additions import TemplateView
 from .models import Page, Post, Resource
 
 import markdown
 import datetime
+import restless.settings as settings
 
 # Create your views here.
 
@@ -74,7 +76,25 @@ def get_resource(request, resource_id):
     ...
 
 
-class PageView(TemplateView):
+class RestlessView(TemplateView):
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context["blog"] = {
+            "title": settings.BLOG_TITLE,
+        }
+
+        context["menu"] = {
+            "primary": [(href, text) if type(href) is str \
+                else (reverse(href[0], kwargs=href[1]), text) \
+                for (href, text) in settings.MENU
+            ]
+        }
+
+        return context
+
+
+class PageView(RestlessView):
     model = Page
     template = "restless/page.html"
     identifiers = [
@@ -82,7 +102,7 @@ class PageView(TemplateView):
     ]
 
 
-class FrontPage(TemplateView):
+class FrontPage(RestlessView):
     model = Page
     template = "restless/front_page.html"
     identifiers = []
@@ -98,12 +118,10 @@ class FrontPage(TemplateView):
         posts = Post.objects.all().order_by('-published_at')[:5]
         context["posts"] = posts
 
-        print(context)
-
         return context
 
 
-class PostView(TemplateView):
+class PostView(RestlessView):
     model = Post
     template = "restless/post.html"
     identifiers = [
