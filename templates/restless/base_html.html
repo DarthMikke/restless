@@ -17,5 +17,27 @@
     {% block content %}
     {% endblock %}
   </main>
+
+  <script type="text/javascript">
+    /**
+     * As presented by Steve Sanderson at NDC Porto 2023
+     * https://youtu.be/fIYYC_p_uU8?si=X8MAalzukfdbx6Kx&t=1744
+     * */
+    document.body.addEventListener('click', event => {
+      const linkElem = event.target.closest('a');
+      if (linkElem) {
+        event.preventDefault();
+        history.pushState(null, '', linkElem.href);
+        performEnhancedNav(linkElem.href);
+      }
+    });
+
+    async function performEnhancedNav(url) {
+      const response = await fetch(url);
+      const html = await response.text();
+      const parsedHtml = new DOMParser().parseFromString(html, 'text/html');
+      document.body.innerHTML = parsedHtml.body.innerHTML;
+    }
+  </script>
 </body>
 </html>
